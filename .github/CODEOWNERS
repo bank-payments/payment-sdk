@@ -1,0 +1,3 @@
+* @bank-payments/Engineering
+/src/pci/ @bank-payments/PCI-Compliance
+/src/card/ @bank-payments/Payments-API

@@ -24,7 +24,7 @@ jobs:
 
     steps:
     - name: Checkout repository (Pinned SHA)
-      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.7
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4.1.7
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@2e230e8fe0ad3a14a3407003297ea9765f27c443 # v3.25.10

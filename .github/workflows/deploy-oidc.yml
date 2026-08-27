@@ -1,0 +1,31 @@
+name: "Secure OIDC Production Deployment"
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  id-token: write # Required for requesting the JWT
+  contents: read  # Least privilege
+
+jobs:
+  deploy:
+    name: Cloud Deployment via OIDC
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout Code (SHA Pinned)
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.7
+
+    - name: Configure AWS Credentials (Keyless OIDC)
+      uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4.0.2
+      with:
+        role-to-assume: arn:aws:iam::123456789012:role/GitHubActionsBankingDeployRole
+        aws-region: us-east-1
+        audience: sts.amazonaws.com
+
+    - name: Deploy Secure Service
+      run: |
+        echo "Successfully authenticated keyless session with AWS IAM via GitHub OIDC federation."
+        echo "Deploying release artifacts to isolated production environment."
